@@ -1,5 +1,7 @@
 package ObjectsGame;
 
+import java.awt.*;
+
 public abstract class Enemy extends GameEntity {
 
     protected double health;
@@ -10,25 +12,25 @@ public abstract class Enemy extends GameEntity {
 
     public void updateDirection() {
 
-        if (x == 32 && y > 288) {
+        if (x == 32 && y > 160) {
             direction = Direction.UP;
         }
-        else if (y == 288 && x < 160) {
+        else if (y == 160 && x < 352) {
             direction = Direction.RiGHT;
         }
-        else if (x == 160 && y > 96) {
-            direction = Direction.UP;
-        }
-        else if (y == 96 && x < 320 ) {
-            direction = Direction.RiGHT;
-        }
-        else if (x == 352 && y < 352 ) {
+        else if (x == 352 && y < 480) {
             direction = Direction.DOWN;
         }
-        else if (y == 352 && x <= 580 ) {
+        else if (x < 672 && y == 480) {
             direction = Direction.RiGHT;
         }
-        else if (x > 580) direction = Direction.LEFT;
+        else if (x == 672 && y > 224) {
+            direction = Direction.UP;
+        }
+        else if (y == 224 && x <= 960) {
+            direction = Direction.RiGHT;
+        }
+        else if (x > 960) direction = Direction.LEFT;
     }
 
     @Override
@@ -42,11 +44,15 @@ public abstract class Enemy extends GameEntity {
                 y += speed;
                 break;
             case LEFT:
-                x -= speed;
                 break;
             case RiGHT:
                 x += speed;
                 break;
         }
+    }
+
+    @Override
+    public void render(Graphics2D g2d) {
+
     }
 }
