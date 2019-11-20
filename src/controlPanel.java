@@ -20,7 +20,7 @@ public class controlPanel extends JPanel implements ActionListener {
     ArrayList<Tower> towers;
 
     boolean flagTower = false;
-    int countTank = 5;
+    int countTank = 1;
     int countNorTower = 0;
     int click = 0;
     int towerNumber = -1;
@@ -30,6 +30,7 @@ public class controlPanel extends JPanel implements ActionListener {
     JButton JButtonNormalTower = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/NormalTower.png")));
     JButton JButtonSniperTower = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/SniperTower.png")));
     JButton JButtonMachineGunTower = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/MachineGunTower.png")));
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -51,8 +52,14 @@ public class controlPanel extends JPanel implements ActionListener {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if (click == 1) {
-                        towers.add(new NormalTower(e.getX() -32, e.getY() -32));
-                        countNorTower++;
+                        int x = e.getX()/64;
+                        int y = e.getY()/64;
+
+                        if( Map1.check_potision[y][x] == true) {
+                            Map1.check_potision[y][x] = false;
+                            towers.add(new NormalTower(x*64, y*64));
+                            countNorTower++;
+                        }
                     }
                 }
             });
@@ -74,8 +81,14 @@ public class controlPanel extends JPanel implements ActionListener {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if (click == 2) {
-                        towers.add(new SniperTower(e.getX() -32, e.getY() -32));
-                        countNorTower++;
+                        int x = e.getX()/64;
+                        int y = e.getY()/64;
+
+                        if( Map1.check_potision[y][x] == true) {
+                            Map1.check_potision[y][x] = false;
+                            towers.add(new SniperTower(x*64, y*64));
+                            countNorTower++;
+                        }
                     }
                 }
             });
@@ -96,9 +109,15 @@ public class controlPanel extends JPanel implements ActionListener {
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if (click == 3) {
-                        towers.add(new MachineGunTower(e.getX() -32, e.getY() -32));
-                        countNorTower++;
+                    if (click ==  3) {
+                        int x = e.getX()/64;
+                        int y = e.getY()/64;
+
+                        if( Map1.check_potision[y][x] == true) {
+                            Map1.check_potision[y][x] = false;
+                            towers.add(new MachineGunTower(x*64, y*64));
+                            countNorTower++;
+                        }
                     }
                 }
             });
@@ -108,6 +127,7 @@ public class controlPanel extends JPanel implements ActionListener {
             click = 0;
         }
     }
+
 
     public controlPanel(GameStage gameStage) {
         this.gameStage = gameStage;
@@ -147,6 +167,15 @@ public class controlPanel extends JPanel implements ActionListener {
         JButtonMachineGunTower.addActionListener(this);
     }
 
+    public void prinfRectangle(Graphics2D g2d){
+        for (int i = 0; i < Map1.check_potision.length; i++) {
+            for (int j = 0; j < Map1.check_potision[i].length; j++) {
+                g2d.draw(Map1.rectangles[i][j]);
+            }
+        }
+    }
+
+
     public void setupObj(){
         for(int a = 0 ; a < countTank ; a++){
             listTank.add(new TankerEnemy(32,672 + a*128));
@@ -166,6 +195,16 @@ public class controlPanel extends JPanel implements ActionListener {
 
             for(int a = 0 ; a < countTank ; a++){
                 listTank.get(a).render(g2d);
+                if (countNorTower > 0) {
+                    for (int i = 0; i < countNorTower; i++) {
+                        towers.get(i).render(g2d);
+                        if(towers.get(i).contains(listTank.get(a))) {
+                            System.out.println(listTank.get(a));
+                            System.out.println(towers.get(i));
+                        }
+
+                    }
+                }
             }
 
             if(listTank.get(countTank - 1).getX() >  960){
@@ -174,11 +213,7 @@ public class controlPanel extends JPanel implements ActionListener {
             }
         }
 
-        if (countNorTower > 0) {
-            for (int i = 0; i < countNorTower; i++) {
-                towers.get(i).render(g2d);
-            }
-        }
+
 
         if (flagTower == true ) {
             switch (click) {
@@ -200,6 +235,10 @@ public class controlPanel extends JPanel implements ActionListener {
 
         if (towerNumber != -1 && countClickObj %2 != 0) {
             g2d.drawOval((int) towers.get(towerNumber).getX() - (int) (towers.get(towerNumber).getShootRange() - 32), (int) towers.get(towerNumber).getY() - (int) (towers.get(towerNumber).getShootRange() - 32), (int) towers.get(towerNumber).getShootRange()*2, (int) towers.get(towerNumber).getShootRange()*2  );
+        }
+
+        if (click != 0) {
+            prinfRectangle(g2d);
         }
     }
 }
