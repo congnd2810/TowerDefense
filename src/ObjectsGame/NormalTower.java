@@ -19,9 +19,13 @@ public class NormalTower extends Tower {
     @Override
     public void render(Graphics2D graphics2D) {
         super.render(graphics2D);
-        int i = (int) x;
+        int i =(int) x;
         int j = (int) y;
-        graphics2D.drawImage(base, i , j, null);
+        int shot = (int) shootRange + 42;
+
+        setBounds(i+32-shot, j+32-shot, shot*2, shot*2);
+
+        graphics2D.drawImage(base, i, j, null);
         graphics2D.drawImage(img, i, j, null);
     }
 }
