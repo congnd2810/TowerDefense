@@ -16,19 +16,19 @@ public abstract class Enemy extends GameEntity {
             direction = Direction.UP;
         }
         else if (y == 160 && x < 352) {
-            direction = Direction.RiGHT;
+            direction = Direction.RIGHT;
         }
         else if (x == 352 && y < 480) {
             direction = Direction.DOWN;
         }
         else if (x < 672 && y == 480) {
-            direction = Direction.RiGHT;
+            direction = Direction.RIGHT;
         }
         else if (x == 672 && y > 224) {
             direction = Direction.UP;
         }
         else if (y == 224 && x <= 960) {
-            direction = Direction.RiGHT;
+            direction = Direction.RIGHT;
         }
         else if (x > 960) direction = Direction.LEFT;
     }
@@ -45,7 +45,7 @@ public abstract class Enemy extends GameEntity {
                 break;
             case LEFT:
                 break;
-            case RiGHT:
+            case RIGHT:
                 x += speed;
                 break;
         }
