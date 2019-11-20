@@ -21,6 +21,8 @@ public class NormalEnemy extends Enemy {
         int i =(int) x;
         int j = (int) y;
 
+        setBounds(i, j-64, 64, 64);
+
         updateDirection();
 
         if (direction == Direction.UP) {
