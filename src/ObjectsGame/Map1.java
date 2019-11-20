@@ -4,8 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Map1 extends GameEntity {
+    public static Rectangle rectangles[][] = new Rectangle[11][16];
+    public static boolean check_potision[][] = new boolean[11][16];
 
-    public Map1(){}
+    public Map1(){
+        for(int i = 0 ; i  <  MAP_SPRITES.length ; i ++){
+            for(int j = 0 ; j < MAP_SPRITES[0].length ; j++){
+                rectangles[i][j] = new Rectangle(j*64,i*64,64,64);
+                if(MAP_SPRITES[i][j].equals("024")){
+                    check_potision[i][j] = true;
+                }
+            }
+        }
+    }
 
     public String[][] MAP_SPRITES = new String[][] {
             { "024", "024", "024", "024", "024", "024", "024", "024", "024", "024", "024", "024", "024", "024", "024", "024"},
@@ -22,7 +33,9 @@ public class Map1 extends GameEntity {
     };
 
     @Override
-    public void update(){}
+    public void update(){
+
+    }
 
     @Override
     public void render(Graphics2D g2d) {
@@ -30,6 +43,7 @@ public class Map1 extends GameEntity {
             for (int j = 0; j < MAP_SPRITES[i].length; j++) {
                 Image img = new ImageIcon(getClass().getResource("/Defaultsize/towerDefense_tile" + MAP_SPRITES[i][j] + ".png")).getImage();
                 g2d.drawImage(img, j * 64, i * 64, null);
+
             }
         }
     }
