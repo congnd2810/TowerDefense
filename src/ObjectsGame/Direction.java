@@ -2,7 +2,7 @@ package ObjectsGame;
 
 enum  Direction {
 
-    LEFT(), UP(), RiGHT(), DOWN();
+    LEFT(), UP(), RIGHT(), DOWN();
 
     Direction() {}
 }
