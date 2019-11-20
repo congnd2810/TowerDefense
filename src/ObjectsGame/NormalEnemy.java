@@ -30,7 +30,7 @@ public class NormalEnemy extends Enemy {
             g2d.setTransform(a);
             g2d.drawImage(img, i, j, null);
         }
-        else if (direction == Direction.RiGHT) {
+        else if (direction == Direction.RIGHT) {
             update();
             AffineTransform backup = g2d.getTransform();
             AffineTransform a = AffineTransform.getRotateInstance(0 , i, j);
