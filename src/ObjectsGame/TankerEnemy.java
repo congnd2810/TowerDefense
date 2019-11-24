@@ -23,7 +23,7 @@ public class TankerEnemy extends Enemy {
         int i =(int) x;
         int j = (int) y;
 
-        setBounds(i, j-64, 64, 64);
+        setBounds(i, j, 64, 64);
 
         updateDirection();
 
@@ -31,24 +31,24 @@ public class TankerEnemy extends Enemy {
 
         if (direction == Direction.UP) {
             update();
-            AffineTransform a = AffineTransform.getRotateInstance(-Math.PI / 2, i, j);
+            AffineTransform a = AffineTransform.getRotateInstance(-Math.PI / 2, i + 32, j + 32);
             g2d.setTransform(a);
             g2d.drawImage(img, i, j, null);
             g2d.drawImage(imgTank, i, j, null);
         }
-        else if (direction == Direction.RIGHT) {
+        else if (direction == Direction.RiGHT) {
             update();
-            AffineTransform a = AffineTransform.getRotateInstance(0 , i, j);
+            AffineTransform a = AffineTransform.getRotateInstance(0 , i + 32, j + 32);
             g2d.setTransform(a);
-            g2d.drawImage(img, i, j - 64, null);
-            g2d.drawImage(imgTank, i, j - 64, null);
+            g2d.drawImage(img, i, j , null);
+            g2d.drawImage(imgTank, i, j, null);
         }
         else if (direction == Direction.DOWN) {
             update();
-            AffineTransform a = AffineTransform.getRotateInstance( Math.PI/3, i, j);
+            AffineTransform a = AffineTransform.getRotateInstance( Math.PI/2, i + 32, j + 32);
             g2d.setTransform(a);
-            g2d.drawImage(img, i - 64, j - 64 , null);
-            g2d.drawImage(imgTank, i - 64, j - 64, null);
+            g2d.drawImage(img, i, j, null);
+            g2d.drawImage(imgTank, i , j , null);
         }
         g2d.setTransform(backup);
     }
