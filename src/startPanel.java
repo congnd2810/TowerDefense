@@ -1,3 +1,5 @@
+import ObjectsGame.Map;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,30 +7,50 @@ import java.awt.event.ActionListener;
 
 public class startPanel extends JPanel {
     GameStage gameStage;
-    Image imgStart = new ImageIcon(getClass().getResource("/Defaultsize/Sample.png")).getImage();
+    Image imgStart = new ImageIcon(getClass().getResource("/Defaultsize/BackGround.png")).getImage();
 
-    JButton jButtonStart = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/start.png")));
-    JButton JButtonCancel = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/cancel.png")));
+    JButton jButtonPlay = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/play.png")));
+    JButton JButtonExit = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/exit.png")));
+    JButton JButtonMap1 = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/Map1.png")));
+    JButton JButtonMap2 = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/Map2.png")));
 
     public startPanel(GameStage gameStage) {
 
         setLayout(null);
 
         this.gameStage = gameStage;
-        add(jButtonStart);
-        add(JButtonCancel);
+        add(jButtonPlay);
+        add(JButtonExit);
+        add(JButtonMap1);
+        add(JButtonMap2);
 
-        jButtonStart.setBounds(320, 200, 200, 51 );
+        jButtonPlay.setBounds(515, 200, 250, 50 );
 
-        jButtonStart.addActionListener(new ActionListener() {
+        jButtonPlay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameStage.showPlay();
+                JButtonMap1.setBounds(455, 300, 200, 150);
+                JButtonMap1.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        gameStage.cp.setMap(new Map(1));
+                        gameStage.showPlay();
+                    }
+                });
+
+                JButtonMap2.setBounds(665, 300, 200, 150);
+                JButtonMap2.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        gameStage.cp.setMap(new Map(2));
+                        gameStage.showPlay();
+                    }
+                });
             }
         });
 
-        JButtonCancel.setBounds(339, 280, 162, 39);
-        JButtonCancel.addActionListener(new ActionListener() {
+        JButtonExit.setBounds(560, 580, 162, 40);
+        JButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
