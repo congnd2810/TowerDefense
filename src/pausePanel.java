@@ -20,6 +20,7 @@ public class pausePanel extends JPanel {
         JButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                GameField.playSoundClick();
                 System.exit(0);
             }
         });
@@ -27,6 +28,7 @@ public class pausePanel extends JPanel {
         JButtonResume.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                GameField.playSoundClick();
                 gameStage.showPlay();
             }
         });
@@ -39,10 +41,10 @@ public class pausePanel extends JPanel {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 11; j++) {
                 Image img = new ImageIcon(getClass().getResource("/Defaultsize/towerDefense_tile024.png")).getImage();
-                g2d.drawImage(img,i*64, j*64, null);
+                g2d.drawImage(img, i * 64, j * 64, null);
             }
         }
         Image bkg = new ImageIcon(getClass().getResource("/Defaultsize/bkg.png")).getImage();
-        g2d.drawImage(bkg,1024, 0, null);
+        g2d.drawImage(bkg, 1024, 0, null);
     }
 }
