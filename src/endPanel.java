@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class endPanel extends JPanel {
     GameStage gameStage;
 
-    JButton JButtonPlayAgain =  new JButton(new ImageIcon(getClass().getResource("/Defaultsize/playagain.png")));
+    JButton JButtonPlayAgain = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/playagain.png")));
     JButton JButtonExit = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/exit2.png")));
 
     public endPanel(GameStage gameStage) {
@@ -22,6 +22,7 @@ public class endPanel extends JPanel {
         JButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                GameField.playSoundClick();
                 System.exit(0);
             }
         });
@@ -29,6 +30,7 @@ public class endPanel extends JPanel {
         JButtonPlayAgain.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                GameField.playSoundClick();
                 gameStage.showMenu();
                 GameField.countTower = 0;
                 GameField.countNumberOfNext = 0;
@@ -47,11 +49,11 @@ public class endPanel extends JPanel {
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 11; j++) {
                 Image img = new ImageIcon(getClass().getResource("/Defaultsize/towerDefense_tile024.png")).getImage();
-                g2d.drawImage(img,i*64, j*64, null);
+                g2d.drawImage(img, i * 64, j * 64, null);
             }
         }
         Image bkg = new ImageIcon(getClass().getResource("/Defaultsize/bkg.png")).getImage();
-        g2d.drawImage(bkg,1024, 0, null);
+        g2d.drawImage(bkg, 1024, 0, null);
 
         Font font = new Font("Kino MT", Font.BOLD, 60);
         g2d.setFont(font);
