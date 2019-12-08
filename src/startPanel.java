@@ -13,6 +13,7 @@ public class startPanel extends JPanel {
     JButton JButtonExit = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/exit.png")));
     JButton JButtonMap1 = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/Map1.png")));
     JButton JButtonMap2 = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/Map2.png")));
+    JButton JButtonAuthor = new JButton(new ImageIcon(getClass().getResource("/Defaultsize/author.png")));
 
     public startPanel(GameStage gameStage) {
 
@@ -23,12 +24,14 @@ public class startPanel extends JPanel {
         add(JButtonExit);
         add(JButtonMap1);
         add(JButtonMap2);
+        add(JButtonAuthor);
 
-        jButtonPlay.setBounds(515, 200, 250, 50 );
+        jButtonPlay.setBounds(515, 200, 250, 50);
 
         jButtonPlay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                GameField.playSoundClick();
                 JButtonMap1.setBounds(455, 300, 200, 150);
                 JButtonMap1.addActionListener(new ActionListener() {
                     @Override
@@ -42,6 +45,7 @@ public class startPanel extends JPanel {
                 JButtonMap2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        GameField.playSoundClick();
                         gameStage.cp.setMap(new Map(2));
                         gameStage.showPlay();
                     }
@@ -53,16 +57,26 @@ public class startPanel extends JPanel {
         JButtonExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                GameField.playSoundClick();
                 System.exit(0);
+            }
+        });
+
+        JButtonAuthor.setBounds(560, 500, 162, 40);
+        JButtonAuthor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GameField.playSoundClick();
+                gameStage.showAuthor();
             }
         });
     }
 
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(imgStart, 0 , 0, null);
+        g2d.drawImage(imgStart, 0, 0, null);
     }
 }
