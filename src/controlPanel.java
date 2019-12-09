@@ -217,12 +217,6 @@ public class controlPanel extends JPanel implements ActionListener {
 
     }
 
-    private void checkWin() {
-        if (GameField.countNumberOfNext ==5 && GameField.listTank.size() == 0) {
-            gameStage.showWin();
-        }
-    }
-
     private void MenuOfItem() {
         /*JButtonNormalTower.setBounds(1056, 60, 64, 64);
         JButtonSniperTower.setBounds(1056, 150, 64, 64);
@@ -257,6 +251,11 @@ public class controlPanel extends JPanel implements ActionListener {
 
     private void checkLose() {
         if (GameField.Alive <= 0) gameStage.showEnd();
+    }
+    private void checkWin() {
+        if (GameField.countNumberOfNext ==5 && GameField.listTank.size() == 0) {
+            gameStage.showWin();
+        }
     }
 
     public void printRectangle(Graphics2D g2d) {
@@ -347,6 +346,7 @@ public class controlPanel extends JPanel implements ActionListener {
             GameField.listTank.get(a).render(g2d);
         }
 
+        checkWin();
 
         for (int a = 0; a < GameField.listTank.size(); a++) {
             if (GameField.listTank.get(a).getX() > 960 || GameField.listTank.get(a).getY() < 0 || GameField.listTank.get(a).invisible == false) {
@@ -380,8 +380,6 @@ public class controlPanel extends JPanel implements ActionListener {
             remove(upgrade);
             remove(sell);
         }
-
-        checkWin();
     }
 
     private void UpdateTower(Tower tower, Graphics2D g2d) {
